@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "688234500854",
+    "project_id": "playerhq-fe976",
+    "storage_bucket": "playerhq-fe976.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688234500854:android:18ce6f383a293a222ed2d7",
+        "android_client_info": {
+          "package_name": "com.example.mobile_playerhq"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvQkMjUY3ZuXujeSO0dbCZVibJxtmwR6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

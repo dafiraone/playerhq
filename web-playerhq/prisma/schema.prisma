@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+model User {
+  user_id    Int      @id @default(autoincrement())
+  username   String   @unique
+  email      String   @unique
+  password   String
+  image      String?
+  bio        String?
+  created_at DateTime @default(now())
+  role       UserRole @default(USER)
+
+  posts        Post[]
+  transactions Transaction[]
+  comments     Comment[]
+}
+
+model Post {
+  post_id    Int      @id @default(autoincrement())
+  user_id    Int
+  content    String?
+  image      String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user     User      @relation(fields: [user_id], references: [user_id])
+  comments Comment[]
+}
+
+enum TransactionStatus {
+  BATAL
+  PENDING
+  BERHASIL
+}
+
+model Transaction {
+  transaction_id   Int               @id @default(autoincrement())
+  user_id          Int
+  game_api_id      Int
+  amount           Float
+  transaction_date DateTime          @default(now())
+  status           TransactionStatus
+
+  user User @relation(fields: [user_id], references: [user_id])
+}
+
+model Comment {
+  comment_id Int      @id @default(autoincrement())
+  post_id    Int
+  user_id    Int
+  content    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  post Post @relation(fields: [post_id], references: [post_id])
+  user User @relation(fields: [user_id], references: [user_id])
+}
